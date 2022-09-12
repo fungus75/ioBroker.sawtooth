@@ -45,7 +45,7 @@
         var table    = $('#configTable');
         
         var clone    = template.clone();
-        table.after(clone);
+        table.append(clone);
     });
     
 	$('#username').val(settings.username).change(function() {
