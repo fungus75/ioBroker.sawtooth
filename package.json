@@ -1,0 +1,35 @@
+{
+  "name": "iobroker.sawtooth",
+  "version": "0.0.1",
+  "description": "Sawtooth for ioBroker",
+  "author": {
+    "name": "Rene Pilz",
+    "email": "rene@pilz.cc"
+  },
+  "homepage": "https://github.com/fungus75/ioBroker.sawtooth.git",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "sawtooth",
+    "Smart Home",
+    "home automation",
+    "light"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fungus75/ioBroker.sawtooth.git"
+  },
+  "dependencies": {
+    "@iobroker/adapter-core": ">=2.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "mocha": "^4.1.0",
+    "chai": "^4.1.2"
+  },
+  "main": "main.js",
+  "bugs": {
+    "url": "https://github.com/fungus75/ioBroker.sawtooth/issues"
+  },
+  "readmeFilename": "README.md"
+}

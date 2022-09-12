@@ -1,0 +1,51 @@
+{
+	"common": {
+		"name": "sawtooth",
+		"version": "0.0.1",
+		"title": "Sawtooth Adapter",
+		"desc": {
+			"en": "Sawtooth for ioBroker",
+			"de": "Sawtooth für ioBroker"
+		},
+		"materialize": true,
+		"compact": true,
+		"dependencies": [
+            {
+                "js-controller": ">=3.0.0"
+            },
+            {
+                "admin":  ">=4.0.10"
+            }
+        ],
+        	"news": {
+			"0.0.1": {
+				"en": "Initial commit on github, not realy working",
+				"de": "Erster commit auf github, nicht wirklich funktionstuechtig"
+			}
+        	},
+		"platform": "Javascript/Node.js",
+	        "main": "main.js",
+		"mode": "schedule",
+		"schedule": "*/1 * * * *",
+		"enabled": true,
+		"license": "MIT",
+		"loglevel": "info",
+		"readme": "https://github.com/fungus75/ioBroker.sawtooth/blob/master/README.md",
+		"icon": "zoe.png",
+		"extIcon": "https://raw.githubusercontent.com/fungus75/ioBroker.sawtooth/master/admin/sawtooth.png",
+       		"authors": ["Rene Pilz <rene@pilz.cc>"],
+		"keywords": ["ioBroker", "Sawtooth", "Smart Home", "home automation", "fadeout", "fadein", "lamp"],
+		"type": "misc-data",
+		"connectionType":"local",
+		"dataSource":"poll"
+	},
+	"native": {
+	},
+	"encryptedNative": [
+   ],
+   "protectedNative": [
+   ],
+	"objects": [],
+	"instanceObjects": []
+
+}
