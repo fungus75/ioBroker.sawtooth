@@ -39,7 +39,6 @@
         
         var clone    = template.clone();
         clone.attr("id","row_"+newIdx);
-        
         table.append(clone);
   }  
 
@@ -52,7 +51,7 @@
     console.log(" --- numberOfLines = "+settings.numberOfLines);
     
     $(".addRow").click(function() {
-        newIdx = $('#configTable').attr('numOfLines')+1;
+        newIdx = parseInt($('#configTable').attr('numOfLines'))+1;
         addRow(newIdx);
         $('#configTable').attr('numOfLines', newIdx);
     });
