@@ -37,8 +37,10 @@
 
     if (!settings.numberOfLines) settings.numberOfLines = 0; 
     $('#configTable').attr('numOfLines', settings.numberOfLines);
+    console.log(" --- numberOfLines = "+settings.numberOfLines);
     
     $(".addRow").click(function() {
+        console.log("***** addRow");
         var template = $('#templateRow'); 
         var table    = $('#configTable');
         
