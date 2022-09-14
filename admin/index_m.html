@@ -36,11 +36,10 @@
         console.log("***** addRow");
         var template = $('#templateRow'); 
         var table    = $('#configTable');
-        debugger;
         var clone    = template.clone();
         clone.find("*").each(function() {
             var oldId=$(this).attr("id");
-            if (oldId) $(this).attr("id",+"_"+newIdx);
+            if (oldId) $(this).attr("id", oldId+"_"+newIdx);
         });
         clone.attr("id","row_"+newIdx).css("display","");
       
