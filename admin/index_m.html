@@ -38,7 +38,7 @@
         var table    = $('#configTable');
         debugger;
         var clone    = template.clone();
-        clone.find().each(function() {
+        clone.find("*").each(function() {
             var oldId=$(this).attr("id");
             if (oldId) $(this).attr("id",+"_"+newIdx);
         });
