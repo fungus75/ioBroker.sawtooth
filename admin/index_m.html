@@ -38,11 +38,11 @@
         var table    = $('#configTable');
         
         var clone    = template.clone();
-        clone.attr("id","row_"+newIdx);
-        clone.css("display","");
-        clone.children().each(function() {
-            $(this).attr("id",$(this).attr("id")+"_"+newIdx);
+        clone.find().each(function() {
+            var oldId=$(this).attr("id");
+            if (oldId) $(this).attr("id",+"_"+newIdx);
         });
+        clone.attr("id","row_"+newIdx).css("display","");
       
         table.append(clone);
   }  
