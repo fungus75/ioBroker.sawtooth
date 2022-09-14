@@ -39,6 +39,7 @@
         
         var clone    = template.clone();
         clone.attr("id","row_"+newIdx);
+        clone.css("display","");
         clone.children().each(function() {
             $(this).attr("id",$(this).attr("id")+"_"+newIdx);
         });
@@ -160,7 +161,7 @@
       <th><label class="translate">Description</label></th>
       <th><label class="addRow">(+)</label></th>
     </tr>
-    <tr id="templateRow" isVisible="1">
+    <tr id="templateRow" isVisible="1" style="display:none">
       <td><input class="value" type="text" size="10"       id="techname"  /></td>
       <td><input class="value" type="text" size="40"       id="techname"  /></td>
       <td><label class=""      onclick="disalbeRow(this)"  id="delete" />(x)</td>
