@@ -50,6 +50,7 @@
   function disalbeRow(element) {
         console.log("***** disalbeRow");
         $(element).closest("tr").attr("isVisible",0).css("display","none");
+        $(element).closest("input").val("");
   }
 
   function valChanged() {
@@ -60,7 +61,13 @@
   // the function loadSettings has to exist ...
   function load(settings, onChange) {
     console.log("***** load");
+    
+    // set onChange:
+    $("#techname").on("change", () => onChange()).on("keyup", () => onChange());
+    $("#description").on("change", () => onChange()).on("keyup", () => onChange());
 
+    
+    // initialize empty list
     if (!settings.list) settings.list = []; 
     $('#configTable').attr('numOfLines', settings.list.length);
     console.log(" --- numberOfLines = "+settings.list.length);
@@ -138,11 +145,11 @@
     var numOfLines = parseInt($('#configTable').attr('numOfLines'));
     var ar = [];
     for (var i = 1 ; i <= numOfLines; i++) {
-        var enabled = $("row_"+i).attr("isVisible");
+        var enabled = $("#row_"+i).attr("isVisible");
         if (enabled == 1) {
             ar.push({
-                techname:    $("techname_"+i).val(),
-                description: $("description"+i).val()
+                techname:    $("#techname_"+i).val(),
+                description: $("#description"+i).val()
             });
         }
     }
@@ -170,8 +177,8 @@
       <th><label class="addRow">(+)</label></th>
     </tr>
     <tr id="templateRow" isVisible="1" style="display:none">
-      <td><input class="value" onkeyup="valChanged()"      id="techname"    type="text" size="10" /></td>
-      <td><input class="value" onkeyup="valChanged()"      id="description" type="text" size="40" /></td>
+      <td><input class="value"                             id="techname"    type="text" size="10" /></td>
+      <td><input class="value"                             id="description" type="text" size="40" /></td>
       <td><label class=""      onclick="disalbeRow(this)"  id="delete"      />(x)</td>
     </tr>
 
