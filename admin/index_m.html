@@ -36,7 +36,7 @@
         console.log("***** addRow");
         var template = $('#templateRow'); 
         var table    = $('#configTable');
-        var clone    = template.clone();
+        var clone    = template.clone(true);
         clone.find("*").each(function() {
             var oldId=$(this).attr("id");
             if (oldId) $(this).attr("id", oldId+"_"+newIdx);
