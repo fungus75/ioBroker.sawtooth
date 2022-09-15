@@ -11,12 +11,11 @@ PLEASE NOTE: THIS IS A VERY EARLY STATE OF DEVELOPMENT, USE OF YOUR OWN RISK
 
 If this adapter is not available on the ioBroker-Admin-View, please use the following command to install it (from command-line on your ioBroker-Server):
 
-```npm install https://github.com/fungus75/ioBroker.sawtooth/tarball/master/```
+```npm install https://github.com/fungus75/ioBroker.sawtooth.git```
 
 Or you can use the GitHub-Button (labeled: install from own URL) in the Adapter-View and enter this URL on the "other"-Tab. This can also be used to update to the current adapter-version:
 
-```https://github.com/fungus75/ioBroker.sawtooth/tarball/master/```
-(if this url does not work, use https://github.com/fungus75/ioBroker.sawtooth.git instead)
+```https://github.com/fungus75/ioBroker.sawtooth.git```
 
 
 You can use the method to update the adapter to the most recent version.

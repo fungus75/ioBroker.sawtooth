@@ -137,7 +137,7 @@
     
     var numOfLines = parseInt($('#configTable').attr('numOfLines'));
     var ar = [];
-    for (int i = 1 ; i <= numOfLines; i++) {
+    for (var i = 1 ; i <= numOfLines; i++) {
         var enabled = $("row_"+i).attr("isVisible");
         if (enabled == 1) {
             ar.push({
