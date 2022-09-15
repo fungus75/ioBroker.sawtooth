@@ -49,8 +49,7 @@
   // remove/disable one row
   function disalbeRow(element) {
         console.log("***** disalbeRow");
-        $(element).closest("tr").attr("isVisible",0).css("display","none");
-        $(element).find("input").val("");
+        $(element).closest("tr").attr("isVisible",0).css("display","none").find("input").val("");
   }
 
   function valChanged() {
