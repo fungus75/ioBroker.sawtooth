@@ -50,7 +50,7 @@
   function disalbeRow(element) {
         console.log("***** disalbeRow");
         $(element).closest("tr").attr("isVisible",0).css("display","none");
-        $(element).closest("input").val("");
+        $(element).find("input").val("");
   }
 
   function valChanged() {
@@ -72,68 +72,21 @@
     $('#configTable').attr('numOfLines', settings.list.length);
     console.log(" --- numberOfLines = "+settings.list.length);
     
-    // TODO: Restore lines from savefile
+    // Restore lines from savefile
+    for (var i=0; i<settings.list.length;i++) {
+        var hlpidx=i+1;
+        addRow(hlpidx);
+        $("#techname_"   +hlpidx).val(settings.list[i].techname);
+        $("#description_"+hlpidx).val(settings.list[i].description);
+    }
     
+    // enable addrow-button
     $(".addRow").click(function() {
         newIdx = parseInt($('#configTable').attr('numOfLines'))+1;
         addRow(newIdx);
         $('#configTable').attr('numOfLines', newIdx);
     });
     
-	$('#username').val(settings.username).change(function() {
-		changed = true;
-		$('#save').button("enable");
-	}).keyup(onChange);
-    
-	$('#password').val(settings.password).change(function() {
-		changed = true;
-		$('#save').button("enable");  
-	}).keyup(onChange);
-
-        $('#locale').val(settings.locale).change(function() {
-                changed = true;
-                $('#save').button("enable");
-        }).keyup(onChange);
-
-    
-	$('#vin').val(settings.vin).change(function() {
-		changed = true;
-		$('#save').button("enable");
-	}).keyup(onChange);
-
-	$('#ignoreApiError').prop('checked',settings.ignoreApiError).click(function() {
-		//$('#ignoreApiError').prop('checked', !$('#ignoreApiError').prop('checked'));
-		changed = true;
-		$('#save').button("enable");
-	}).keyup(onChange);
-	
-	$('#useLocationApi').prop('checked',settings.useLocationApi).click(function() {
-		changed = true;
-		$('#save').button("enable");
-	}).keyup(onChange);
-	
-	$('#useHVACApi').prop('checked',settings.useHVACApi).click(function() {
-		changed = true;
-		$('#save').button("enable");
-	}).keyup(onChange);
-	
-
-	$('#kamereonApiKey').val(settings.kamereonApiKey).change(function() {
-		changed = true;
-		$('#save').button("enable");
-	}).keyup(onChange);
-	
-	$('#stopChargeWorkaroundHour').val(settings.stopChargeWorkaroundHour).change(function() {
-		changed = true;
-		$('#save').button("enable");
-	}).keyup(onChange);
-
-	$('#timeout').val(settings.timeout).change(function() {
-		changed = true;
-		$('#save').button("enable");
-	}).keyup(onChange);
-	
-
     onChange(false);
   }
 
