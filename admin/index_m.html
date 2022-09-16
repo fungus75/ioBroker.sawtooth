@@ -100,8 +100,8 @@
         var enabled = $("#row_"+i).attr("isVisible");
         if (enabled == 1) {
             ar.push({
-                techname:    $("#techname_"   +i).val(),
-                description: $("#description_"+i).val()
+                techname:    $.trim($("#techname_"   +i).val()),
+                description: $.trim($("#description_"+i).val())
             });
         }
     }
