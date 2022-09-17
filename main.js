@@ -203,6 +203,46 @@ function readNextState(item,states,idx) {
     if (idx>=states.length) {
         // all values read, lets process
         adapter.log.info(" all states read");
+	var params={};
+	for (var i = 0;i < states.length; i++) {
+		params[states[i].name] = states[i].val;
+	}
+
+	// check readonly
+	if (params.readOnly) params.currentValue=params.lastValue;
+
+	// check reset
+	if (params.reset) {
+		adapter.log.info(" >> reset");
+		// read reset-mode
+		if (params.resetMode == 0) params.currentValue=params.minValue; else params.currentValue=params.maxValue;
+		// temporary set some parameters, so that reset-value wont stay for that cycle
+		params.lastValue=params.currentValue;
+		params.increment=0;
+		adapter.setState(item.techname+'.reset', { val : false, ack:true});
+	} 
+	
+	// check if curValue was changed
+	if (params.currentValue!=params.lastValue) {
+		adapter.log.info(" >> value changed!");
+		if (params.currentValue<params.lastValue && params.increment<0) params.currentValue=params.minValue; else params.currentValue=params.maxValue;
+		// temporary set some parameters, so that the value wont be adjusted
+		params.lastValue=params.currentValue;
+		params.increment=0;
+	}
+
+	// do the increment
+	params.currentValue+=params.increment;
+
+	// check boundaries
+	if (params.currentValue>params.maxValue) params.currentValue=params.maxValue;
+	if (params.currentValue<params.minValue) params.currentValue=params.minValue;
+
+	// store currentValue also as lastValue
+	adapter.setState(item.techname+'.currentValue', { val : params.currentValue, ack:true});
+        adapter.setState(item.techname+'.lastValue', { val : params.currentValue, ack:true});
+	adapter.log.info(" >> new value: "+params.currentValue);
+	
         return;
     }
     var stateName=states[idx].name;
