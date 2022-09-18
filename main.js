@@ -211,7 +211,7 @@ function readNextState(item,states,idx) {
 
     // check increment (0 means "disabled")
     if (params.increment == 0) {
-        adapter.log.info(" increment = 0 ==> sawtool disabled for "+item.techname);
+        adapter.log.info(" increment = 0 ==> sawtooth disabled for "+item.techname);
         // just set lastValue and exit
         adapter.setState(item.techname+'.lastValue', { val : params.currentValue, ack:true});
         return;        
