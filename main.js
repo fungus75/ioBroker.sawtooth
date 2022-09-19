@@ -219,6 +219,9 @@ async function readNextState(item,states,idx) {
     
 	// check readonly
 	if (params.readOnly) params.currentValue=params.lastValue;
+	
+	// check null
+	if (params.currentValue==null) params.currentValue = 0;
 
 	// check reset
 	if (params.reset) {
