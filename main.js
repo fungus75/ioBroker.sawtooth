@@ -202,10 +202,11 @@ async function createSawtooth(item,el) {
 async function readNextState(item,states,idx) {
     if (idx>=states.length) {
         // all values read, lets process
-        adapter.log.info(" all states read");
+        adapter.log.info(" all states read of "+item.techname);
 	var params={};
 	for (var i = 0;i < states.length; i++) {
 		params[states[i].name] = states[i].val;
+        adapter.log.info(" > "+states[i].name+" = "+states[i].val);
 	}
 
 
@@ -262,7 +263,6 @@ async function readNextState(item,states,idx) {
 	adapter.getState(path, function (err, state) {
 		if (state!=null) {
 		    states[idx].val = state.val;
-		    adapter.log.info(" > "+states[idx].name+" = "+states[idx].val);
 		    readNextState(item,states,idx+1);
 		} else {
 		    adapter.log.info(" >! "+path);
