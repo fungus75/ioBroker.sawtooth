@@ -25,13 +25,13 @@ You can use the method to update the adapter to the most recent version.
 After the installation the adapter should show up in the ioBroker-Admin-View.
 
 ### Configuration
-
+Please follow the documentation at https://github.com/fungus75/ioBroker.sawtooth/wiki
 
 ### Features
 
 ## Changelog
 
-### 0.0.1 (2022-09-11)
+### 0.0.1 (2022-09-19)
 - nonworking version, just to create initial repo on github
 
 ## License
