@@ -43,7 +43,7 @@ async function main() {
 	adapter.terminate ? adapter.terminate() :process.exit(0);
 }
 
-function processSawtooth(item) {
+async function processSawtooth(item) {
     adapter.log.info(" Processing "+item.techname);
     var states=[
         {name:'currentValue'},
@@ -55,7 +55,7 @@ function processSawtooth(item) {
         {name:'lastValue'},
         {name:'readOnly'}
     ];
-    readNextState(item,states,0);
+    await readNextState(item,states,0);
 }
 
 async function createSawtooth(item,el) {
@@ -73,7 +73,7 @@ async function createSawtooth(item,el) {
             await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
                 type: 'state',
                 common: {
-                    name: 'Current  Value',
+                    name: 'sawtooth.'+item.techname+'.'+el,
                     type: 'number',
                     role: 'value',
                     read: true,
@@ -89,7 +89,7 @@ async function createSawtooth(item,el) {
             await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
                 type: 'state',
                 common: {
-                    name: 'Minimum  Value',
+                    name: 'sawtooth.'+item.techname+'.'+el,
                     type: 'number',
                     role: 'value',
                     read: true,
@@ -105,7 +105,7 @@ async function createSawtooth(item,el) {
             await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
                 type: 'state',
                 common: {
-                    name: 'Maximum Value',
+                    name: 'sawtooth.'+item.techname+'.'+el,
                     type: 'number',
                     role: 'value',
                     read: true,
@@ -121,7 +121,7 @@ async function createSawtooth(item,el) {
             await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
                 type: 'state',
                 common: {
-                    name: 'Increment per Cycle',
+                    name: 'sawtooth.'+item.techname+'.'+el,
                     type: 'number',
                     role: 'value',
                     read: true,
@@ -137,7 +137,7 @@ async function createSawtooth(item,el) {
             await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
                 type: 'state',
                 common: {
-                    name: 'Reset Sawtooth',
+                    name: 'sawtooth.'+item.techname+'.'+el,
                     type: 'boolean',
                     role: 'button.reset',
                     read: true,
@@ -153,7 +153,7 @@ async function createSawtooth(item,el) {
             await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
                 type: 'state',
                 common: {
-                    name: 'Reset mode',
+                    name: 'sawtooth.'+item.techname+'.'+el,
                     type: 'number',
                     role: 'indicator.status',
                     read: true,
@@ -170,7 +170,7 @@ async function createSawtooth(item,el) {
             await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
                 type: 'state',
                 common: {
-                    name: 'last saved Value',
+                    name: 'sawtooth.'+item.techname+'.'+el,
                     type: 'number',
                     role: 'value',
                     read: true,
@@ -186,7 +186,7 @@ async function createSawtooth(item,el) {
             await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
                 type: 'state',
                 common: {
-                    name: 'Readonly Value',
+                    name: 'sawtooth.'+item.techname+'.'+el,
                     type: 'boolean',
                     role: 'switch',
                     read: true,
@@ -199,7 +199,7 @@ async function createSawtooth(item,el) {
         }
 }
 
-function readNextState(item,states,idx) {
+async function readNextState(item,states,idx) {
     if (idx>=states.length) {
         // all values read, lets process
         adapter.log.info(" all states read");
