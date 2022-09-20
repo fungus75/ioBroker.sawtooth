@@ -32,7 +32,7 @@ Please follow the documentation at https://github.com/fungus75/ioBroker.sawtooth
 ## Changelog
 
 ### 0.0.1 (2022-09-19)
-- nonworking version, just to create initial repo on github
+- alpha-version, just for testing.
 
 ## License
 The MIT License (MIT)
