@@ -10,6 +10,17 @@ const utils = require('@iobroker/adapter-core');
 // adapter will be restarted automatically every time as the configuration
 // changed, e.g system.adapter.mobile-alerts.0
 let adapter;
+let RESETMODE={
+        0: 'SetToMin', 
+        1: 'SetToMax'
+    };
+    
+let BOUNCEMODE={
+        0: 'Stay',
+        1: 'JumpToOtherEnd',
+        2: 'InvertIncrement'
+    };
+
 function startAdapter(options) {
   options = options || {};
   Object.assign(options, {
@@ -53,7 +64,8 @@ async function processSawtooth(item) {
         {name:'reset'},
         {name:'resetMode'},
         {name:'lastValue'},
-        {name:'readOnly'}
+        {name:'readOnly'},
+        {name:'bounceMode'}
     ];
     await readNextState(item,states,0);
 }
@@ -159,12 +171,30 @@ async function createSawtooth(item,el) {
                     read: true,
                     write: true,
                     desc: 'How to set value if resetted',
-                    states: {0: 'SetToMin', 1: 'SetToMax'}
+                    states: RESETMODE
                 },
                 native: {}
             });
             adapter.setState(item.techname+'.'+el, {val : 0,ack : true});
         }
+
+        if (el=="bounceMode") {
+            await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
+                type: 'state',
+                common: {
+                    name: 'sawtooth.'+item.techname+'.'+el,
+                    type: 'number',
+                    role: 'indicator.status',
+                    read: true,
+                    write: true,
+                    desc: 'Behavier when reaching boundaries',
+                    states: BOUNCEMODE
+                },
+                native: {}
+            });
+            adapter.setState(item.techname+'.'+el, {val : 0,ack : true});
+        }
+
 
         if (el=="lastValue") {
             await adapter.setObjectNotExistsAsync(item.techname+'.'+el, {
@@ -228,7 +258,7 @@ async function readNextState(item,states,idx) {
 	if (params.reset) {
 		adapter.log.info(" >> reset");
 		// read reset-mode
-		if (params.resetMode == 0) params.currentValue=params.minValue; else params.currentValue=params.maxValue;
+		if (RESETMODE[params.resetMode] == 'SetToMin') params.currentValue=params.minValue; else params.currentValue=params.maxValue;
 		// temporary set some parameters, so that reset-value wont stay for that cycle
 		params.lastValue=params.currentValue;
 		params.increment=0;
@@ -248,8 +278,22 @@ async function readNextState(item,states,idx) {
 	params.currentValue+=params.increment;
 
 	// check boundaries
-	if (params.currentValue>params.maxValue) params.currentValue=params.maxValue;
-	if (params.currentValue<params.minValue) params.currentValue=params.minValue;
+	if (params.currentValue>params.maxValue) {
+	    if (BOUNCEMODE[params.bounceMode] == 'Stay') params.currentValue=params.maxValue;
+	    if (BOUNCEMODE[params.bounceMode] == 'JumpToOtherEnd') params.currentValue=params.minValue;
+	    if (BOUNCEMODE[params.bounceMode] == 'InvertIncrement') { 
+	        params.currentValue=params.maxValue; 
+        	adapter.setState(item.techname+'.increment', { val : -params.increment, ack:true});
+	    }
+	}
+	if (params.currentValue<params.minValue) {
+	    if (BOUNCEMODE[params.bounceMode] == 'Stay') params.currentValue=params.minValue;
+	    if (BOUNCEMODE[params.bounceMode] == 'JumpToOtherEnd') params.currentValue=params.maxValue;
+	    if (BOUNCEMODE[params.bounceMode] == 'InvertIncrement') { 
+	        params.currentValue=params.minValue; 
+        	adapter.setState(item.techname+'.increment', { val : -params.increment, ack:true});
+	    }
+	}
 
 	// store currentValue also as lastValue
 	adapter.setState(item.techname+'.currentValue', { val : params.currentValue, ack:true});

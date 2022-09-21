@@ -31,6 +31,9 @@ Please follow the documentation at https://github.com/fungus75/ioBroker.sawtooth
 
 ## Changelog
 
+### 0.0.2 (2022-09-21)
+- added bounceMode
+
 ### 0.0.1 (2022-09-19)
 - alpha-version, just for testing.
 

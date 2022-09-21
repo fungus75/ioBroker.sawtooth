@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "sawtooth",
-		"version": "0.0.1",
+		"version": "0.0.2",
 		"title": "Sawtooth Adapter",
 		"desc": {
 			"en": "Sawtooth for ioBroker",
@@ -18,6 +18,10 @@
             }
         ],
         	"news": {
+			"0.0.2": {
+				"en": "Added Parameter bounceMode",
+				"de": "den Parameter bounceMode eingebaut"
+			}, 
 			"0.0.1": {
 				"en": "Initial commit on github, not realy working",
 				"de": "Erster commit auf github, nicht wirklich funktionstuechtig"
